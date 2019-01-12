@@ -10,7 +10,7 @@ class MastermindApi(object):
 		self.API_KEY_CORRECT_COLOUR_AND_LOCATION = "CORRECT_COLOUR_AND_LOCATION"	
 
 class MastermindGame(RestGameClient, MastermindApi):
-	def __init__(self, hostname, port="8080"):
+	def __init__(self, hostname, port="80"):
 		super().__init__(hostname, port, gameName="mastermind")
 		MastermindApi.__init__(self)
 
@@ -40,12 +40,12 @@ class MastermindGame(RestGameClient, MastermindApi):
 			print("You guessed the correct combination!")
 
 
-mmind = MastermindGame("localhost")
+mmind = MastermindGame("joshua-env.sj5nm3sr7a.us-east-2.elasticbeanstalk.com")
 
-# # mmind.register("username", "password", "I'm the first user")
+mmind.register("username", "password", "I'm the first user")
 mmind.login("username", "password")
-# # mmind.startNewGame()
-mmind.rejoinGame("755494111")
+mmind.startNewGame()
+# mmind.rejoinGame("755494111")
 
 # Colours are: Blue, Green, Yellow, Pink, Orange, Red
 mmind.guess("bgpy")
