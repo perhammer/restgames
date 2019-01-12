@@ -23,7 +23,7 @@ class RestApi(object):
 		self.API_LOCATION_REJOIN = "/rejoin/"
 
 class RestGameClient(RestApi):
-	def __init__(self, hostname, port="8080", gameName=""):
+	def __init__(self, hostname, port="80", gameName=""):
 		super().__init__()
 		self.authorization = ""
 		self.hostname = hostname
