@@ -13,11 +13,13 @@
 | Solving @ Scale | Writing an automatic solver for a game | 250 |
 
 ## Connection details
-The Game Service is running at joshua-env.sj5nm3sr7a.us-east-2.elasticbeanstalk.com
+The Game Service is running at joshua-env.sj5nm3sr7a.us-east-2.elasticbeanstalk.com.
 
 ## Registering and Logging In
 1. POST to the /register end-point with 'teamname' and 'teampass' parameters
 1. POST to the /login end-point with the same 'teamname' and 'teampass' parameters, and store the 'Authorization' header for future requests.
+
+All the payloads have to be JSON with a content-type of application/json.
 
 ## Available Games
 1. Mastermind is available at /mastermind
