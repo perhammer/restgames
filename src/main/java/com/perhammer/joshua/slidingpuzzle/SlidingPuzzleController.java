@@ -1,36 +1,25 @@
 package com.perhammer.joshua.slidingpuzzle;
 
+import com.perhammer.joshua.puzzlegames.PuzzleGameController;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class SlidingPuzzleController {
+public class SlidingPuzzleController extends PuzzleGameController {
 
+    private static final String GAMENAME = "Slide/";
     private int blankY;
     private int blankX;
-    private int moveCounter;
 
-    private static Random random;
     private SlidingPuzzleBoardAsciiRenderer renderer;
-
-    public static SlidingPuzzleController get3by3game() {
-        return getSquareGame(3);
-    }
-    public static SlidingPuzzleController get4by4game() {
-        return getSquareGame(4);
-    }
-    public static SlidingPuzzleController get5by5game() {
-        return getSquareGame(5);
-    }
-
-    private static SlidingPuzzleController getSquareGame(int i) {
-        return new SlidingPuzzleController( i, i);
-    }
 
     private SlidingPuzzleBoard board;
 
-    private SlidingPuzzleController(int width, int height) {
+    public SlidingPuzzleController(int width, int height, Random random) {
+        super(random);
+
         String[][] tiles = getXbyYBoard(width, height);
 
         this.blankX = width-1;
@@ -41,8 +30,6 @@ public class SlidingPuzzleController {
         this.board = new SlidingPuzzleBoard(
                 tiles
         );
-
-        this.random = new Random();
     }
 
     public void setRenderer(SlidingPuzzleBoardAsciiRenderer renderer) {
@@ -54,9 +41,15 @@ public class SlidingPuzzleController {
         return board;
     }
 
+    @Override
     public void scramble() {
         scramble(board);
         this.moveCounter = 0;
+    }
+
+    @Override
+    public String getGameVariation() {
+        return GAMENAME+board.getVariation();
     }
 
     public void slide(SlidingMove direction) {
@@ -66,9 +59,13 @@ public class SlidingPuzzleController {
         if (getValidMoves().contains(direction.getOpposite())) {
             moveCounter++;
             move(direction.getOpposite());
+            if(isFinished()) {
+                super.finished();
+            }
         }
     }
 
+    @Override
     public boolean isFinished() {
         if (moveCounter==0) {
             return false;
@@ -183,9 +180,5 @@ public class SlidingPuzzleController {
         }
 
         return board;
-    }
-
-    public void setRandom(Random random) {
-        this.random = random;
     }
 }

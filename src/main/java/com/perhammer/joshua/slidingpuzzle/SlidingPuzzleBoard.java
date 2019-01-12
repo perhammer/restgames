@@ -13,4 +13,7 @@ public class SlidingPuzzleBoard {
         return this.tiles;
     }
 
+    public String getVariation() {
+        return ((tiles.length*tiles[0].length)-1)+"";
+    }
 }

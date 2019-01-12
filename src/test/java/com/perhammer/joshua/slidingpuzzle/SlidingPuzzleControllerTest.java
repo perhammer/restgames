@@ -13,14 +13,13 @@ public class SlidingPuzzleControllerTest {
 
     @Test
     public void test3by3() throws IOException {
-        SlidingPuzzleController spc = SlidingPuzzleController.get3by3game();
+        Random random = new Random(-3854787941188383801L);
+
+        SlidingPuzzleController spc = SlidingPuzzleControllerFactory.getFactory(random).get3by3game();
+                //SlidingPuzzleController.get3by3game();
 
         SlidingPuzzleBoardAsciiRenderer renderer = new SlidingPuzzleBoardAsciiRenderer();
         spc.setRenderer(renderer);
-
-        Random random = new Random(-3854787941188383801L);
-
-        spc.setRandom(random);
 
         spc.scramble();
 

@@ -13,7 +13,7 @@ public class MastermindStateResourceAssembler implements ResourceAssembler<Maste
 
     @Override
     public Resource<MastermindState> toResource(MastermindState mastermindState) {
-        Long gameId = Long.parseLong(mastermindState.getGameId());
+        Integer gameId = Integer.parseInt(mastermindState.getGameId());
 
         Resource<MastermindState> resource = new Resource(mastermindState);
 

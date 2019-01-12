@@ -11,7 +11,7 @@ public class SlideState {
     private SlidingPuzzleBoard board;
     private List<SlidingMove> moves;
 
-    public SlideState(Long gameId, SlidingPuzzleBoard spb) {
+    public SlideState(Integer gameId, SlidingPuzzleBoard spb) {
         this.gameId = gameId+"";
         this.board = spb;
     }

@@ -33,34 +33,7 @@ public class Mastermind {
             }
             attempt = new ArrayList<>();
             for(int i=0; i!=4; i++) {
-                switch(line.charAt(i)) {
-                    case 'B':
-                    case 'b':
-                        attempt.add(MastermindColour.BLUE);
-                        break;
-                    case 'G':
-                    case 'g':
-                        attempt.add(MastermindColour.GREEN);
-                        break;
-                    case 'O':
-                    case 'o':
-                        attempt.add(MastermindColour.ORANGE);
-                        break;
-                    case 'P':
-                    case 'p':
-                        attempt.add(MastermindColour.PURPLE);
-                        break;
-                    case 'R':
-                    case 'r':
-                        attempt.add(MastermindColour.RED);
-                        break;
-                    case 'Y':
-                    case 'y':
-                        attempt.add(MastermindColour.YELLOW);
-                        break;
-                    default:
-//                        attempt.add(MastermindColour.DUMMY);
-                }
+                attempt.add(MastermindColour.fromString(line.charAt(i)));
             }
 
             List<MastermindHint> hints = mc.addAttempt(attempt);

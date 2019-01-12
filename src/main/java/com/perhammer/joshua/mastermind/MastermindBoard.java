@@ -44,4 +44,7 @@ public class MastermindBoard {
         return hint;
     }
 
+    public int getChallengeWidth() {
+        return challenge.size();
+    }
 }

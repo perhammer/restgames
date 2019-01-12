@@ -1,24 +1,18 @@
 package com.perhammer.joshua.registration;
 
+import com.perhammer.joshua.scores.Score;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import java.util.Random;
+import javax.persistence.*;
+import java.util.List;
 
-@Data
+@Data @NoArgsConstructor
 @Entity
 public class Registration {
-    private @Id @GeneratedValue Long id;
-    String teamname;
-
-    Registration() {
-        this.teamname = "UNSPECIFIED";
-    }
-
-    Registration(String hostname, String teamname) {
-        this();
-        this.teamname = teamname;
-    }
+    private @Id @GeneratedValue @Column(name = "REG_ID") Long id;
+    @Column(unique=true)
+    private String teamname;
+    private String teampass;
+    private String displayName;
 }

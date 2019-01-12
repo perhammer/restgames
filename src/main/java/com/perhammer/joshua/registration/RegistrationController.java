@@ -1,8 +1,12 @@
 package com.perhammer.joshua.registration;
 
+import org.hibernate.exception.ConstraintViolationException;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
 import org.springframework.http.MediaType;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,10 +20,12 @@ public class RegistrationController {
 
     private final RegistrationRepository repository;
     private final RegistrationResourceAssembler assembler;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public RegistrationController(RegistrationRepository repository, RegistrationResourceAssembler assembler) {
+    public RegistrationController(RegistrationRepository repository, RegistrationResourceAssembler assembler, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.repository = repository;
         this.assembler = assembler;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     @GetMapping(value = "/registrations", produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -42,6 +48,14 @@ public class RegistrationController {
 
     @PostMapping("/register")
     Resource<Registration> newEmployee(@RequestBody Registration newRegistration) {
+        newRegistration.setTeampass(bCryptPasswordEncoder.encode(newRegistration.getTeampass()));
+
+        try {
+            repository.saveAndFlush(newRegistration);
+        } catch (DataAccessException dao) {
+            throw new TeamNameNotUniqueException("Sorry, team name '"+newRegistration.getTeamname()+"' is already in use.");
+        }
+
         return assembler.toResource(repository.save(newRegistration));
     }
 

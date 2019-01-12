@@ -18,7 +18,7 @@ public class MinesweeperState {
     @JsonIgnore
     private boolean finished;
 
-    public MinesweeperState(Long gameId) {
+    public MinesweeperState(Integer gameId) {
         this.gameId = gameId+"";
         this.finished = false;
     }

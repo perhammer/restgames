@@ -15,28 +15,28 @@ public class SlideStateResourceAssembler implements ResourceAssembler<SlideState
     @Override
     public Resource<SlideState> toResource(SlideState slideState) {
 
-        Long gameId = Long.parseLong(slideState.getGameId());
+        Integer gameId = Integer.parseInt(slideState.getGameId());
 
         Resource<SlideState> resource = new Resource(slideState);
 
         if(slideState.getMoves().size()>0) {
             resource.add(
-                    linkTo(methodOn(Slide.class).newGame(gameId)).withRel("new")
+                    linkTo(methodOn(SlidePuzzle.class).newGame(gameId)).withRel("new")
             );
             for(SlidingMove move:slideState.getMoves()) {
                 Link link;
                 switch(move) {
                     case NORTH:
-                        link = linkTo(methodOn(Slide.class).up(gameId)).withRel(move+"");
+                        link = linkTo(methodOn(SlidePuzzle.class).up(gameId)).withRel(move+"");
                         break;
                     case SOUTH:
-                        link = linkTo(methodOn(Slide.class).down(gameId)).withRel(move+"");
+                        link = linkTo(methodOn(SlidePuzzle.class).down(gameId)).withRel(move+"");
                         break;
                     case EAST:
-                        link = linkTo(methodOn(Slide.class).right(gameId)).withRel(move+"");
+                        link = linkTo(methodOn(SlidePuzzle.class).right(gameId)).withRel(move+"");
                         break;
                     case WEST:
-                        link = linkTo(methodOn(Slide.class).left(gameId)).withRel(move+"");
+                        link = linkTo(methodOn(SlidePuzzle.class).left(gameId)).withRel(move+"");
                         break;
                     default:
                         link = null;
@@ -47,7 +47,7 @@ public class SlideStateResourceAssembler implements ResourceAssembler<SlideState
             }
         } else {
             resource.add(
-                    linkTo(methodOn(Slide.class).newGame()).withRel("new")
+                    linkTo(methodOn(SlidePuzzle.class).newGame()).withRel("new")
             );
         }
 

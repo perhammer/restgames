@@ -1,20 +1,40 @@
 package com.perhammer.joshua.minesweeper;
 
-public class MinesweeperController {
+import com.perhammer.joshua.puzzlegames.PuzzleGameController;
+
+import java.util.Random;
+
+public class MinesweeperController extends PuzzleGameController {
+
+    private static final String GAMENAME = "Minesweeper";
 
     private MinesweeperBoardModel boardModel;
     private boolean firstMoveMade;
 
     public MinesweeperController(MinesweeperBoardModel boardModel) {
+        this(boardModel, new Random());
+    }
+
+    public MinesweeperController(MinesweeperBoardModel boardModel, Random random) {
+        super(random);
+
         this.boardModel = boardModel;
         this.firstMoveMade = false;
     }
 
     public void mark(int x, int y) {
+        if(boardModel.isMarked(x,y)) {
+            return;
+        }
+        moveCounter++;
         boardModel.mark(x,y);
     }
 
     public void unmark(int x, int y) {
+        if(!boardModel.isMarked(x,y)) {
+            return;
+        }
+        moveCounter++;
         boardModel.unmark(x,y);
     }
 
@@ -22,6 +42,9 @@ public class MinesweeperController {
         if(boardModel.isUncovered(x,y)) {
             return;
         }
+
+        moveCounter++;
+
         boardModel.uncover(x, y);
 
         if(boardModel.isMined(x,y)) {
@@ -38,6 +61,7 @@ public class MinesweeperController {
                     }
                 }
             } else {
+                super.finished();
                 throw new MinesweeperGameLostException();
             }
         }
@@ -56,8 +80,19 @@ public class MinesweeperController {
         }
 
         if (isGameWon()) {
+            super.finished();
             throw new MinesweeperGameWonException();
         }
+    }
+
+    @Override
+    public void scramble() {
+        // nop
+    }
+
+    @Override
+    public String getGameVariation() {
+        return GAMENAME+boardModel.getWidth()+"x"+boardModel.getHeight()+"x"+boardModel.getNumberOfMines();
     }
 
     private boolean isGameWon() {

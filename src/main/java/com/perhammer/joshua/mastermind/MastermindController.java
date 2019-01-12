@@ -1,34 +1,29 @@
 package com.perhammer.joshua.mastermind;
 
+import com.perhammer.joshua.puzzlegames.PuzzleGameController;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class MastermindController {
+public class MastermindController extends PuzzleGameController {
 
+    private static final String GAMENAME = "Mastermind/";
     private final MastermindBoard board;
-    private Random random;
-
-    private int moveCounter;
-    private boolean isFinished;
 
     public MastermindController() {
         this(new Random());
     }
 
     public MastermindController(Random random) {
-        this.random = random;
+        super(random);
         this.board = new MastermindBoard();
-        this.random = random;
 
         scramble();
     }
 
-    public boolean isFinished() {
-        return isFinished;
-    }
-
+    @Override
     public void scramble() {
         List<MastermindColour> challenge = new ArrayList<>();
 
@@ -37,17 +32,23 @@ public class MastermindController {
         challenge.addAll(MastermindColour.ALL_VALID_COLOURS);
         challenge.addAll(MastermindColour.ALL_VALID_COLOURS);
 
-        Collections.shuffle(challenge, random);
+        Collections.shuffle(challenge, super.random);
 
         board.setChallenge(
                 challenge.subList(0, 4)
         );
-        this.moveCounter = 0;
-        this.isFinished = false;
+
+        super.moveCounter = 0;
+        super.isFinished = false;
+    }
+
+    @Override
+    public String getGameVariation() {
+        return GAMENAME+board.getChallengeWidth();
     }
 
     public List<MastermindHint> addAttempt(List<MastermindColour> attempt) {
-        if (isFinished) {
+        if (isFinished()) {
             return new ArrayList<MastermindHint>() {
                 {
                     add(MastermindHint.CORRECT_COLOUR_AND_LOCATION);
@@ -57,6 +58,9 @@ public class MastermindController {
                 }
             };
         }
+
+        super.moveCounter++;
+
         List<MastermindHint> hint = board.addAttempt(attempt);
 
         int pinsCorrect = 0;
@@ -67,10 +71,16 @@ public class MastermindController {
         }
 
         isFinished = (4 == pinsCorrect);
+        if(isFinished) {
+            super.finished();
+        }
 
-        Collections.shuffle(hint);
+        Collections.shuffle(hint, super.random);
 
         return hint;
     }
 
+    public MastermindBoard getBoard() {
+        return board;
+    }
 }

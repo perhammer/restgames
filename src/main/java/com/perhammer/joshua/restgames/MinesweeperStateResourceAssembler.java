@@ -12,7 +12,7 @@ public class MinesweeperStateResourceAssembler implements ResourceAssembler<Mine
 
     @Override
     public Resource<MinesweeperState> toResource(MinesweeperState minesweeperState) {
-        Long gameId = Long.parseLong(minesweeperState.getGameId());
+        Integer gameId = Integer.parseInt(minesweeperState.getGameId());
 
         Resource<MinesweeperState> resource = new Resource<>(minesweeperState);
 

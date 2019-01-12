@@ -15,7 +15,7 @@ public class MastermindState {
     private List<MastermindHint> hint;
 
 
-    public MastermindState(Long gameId) {
+    public MastermindState(int gameId) {
         this.gameId = gameId+"";
         this.code = "XXXX";
         this.hint = Collections.emptyList();

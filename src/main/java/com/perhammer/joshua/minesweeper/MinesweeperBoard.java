@@ -148,7 +148,7 @@ public class MinesweeperBoard {
                     if (!(i==x && j==y)) {
                         if (slots[i][j]==UNMINED) {
                             slots[i][j]=MINED;
-                            System.out.println("Moved mine to "+i+", "+j+". Board is "+slots.length+"x"+slots[0].length);
+                            System.out.println("Moved mine to "+i+", "+j+". Twenty48Board is "+slots.length+"x"+slots[0].length);
                             break;
                         }
                     }

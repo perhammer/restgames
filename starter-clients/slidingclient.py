@@ -2,6 +2,7 @@
 
 import requests
 import json
+import sys
 
 GAME_HOST = "localhost"
 GAME_PORT = "8080"
@@ -71,11 +72,13 @@ def makeMove():
 	elif DIRECTION_EAST in links and lastMove!=DIRECTION_WEST:
 		slideBlankTile(DIRECTION_EAST)
 
-startNewGame()
-print("Game "+gameId+" started...")
+def printBoard():
+	for row in board:
+		print(row)
 
-while len(links)>0:
-	print(board)
-	makeMove()
+# startNewGame()
+gameId=str(274490483420723862)
+print("Game "+gameId+" joined...")
+slideBlankTile(DIRECTION_WEST)
+printBoard()
 
-print("WON!")
