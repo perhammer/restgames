@@ -13,7 +13,7 @@
 | Solving @ Scale | Writing an automatic solver for a game | 250 |
 
 ## Connection details
-The Game Service is running at joshua-env.sj5nm3sr7a.us-east-2.elasticbeanstalk.com.
+The Game Service is not running.
 
 ## Registering and Logging In
 1. POST to the /register end-point with 'teamname' and 'teampass' parameters
