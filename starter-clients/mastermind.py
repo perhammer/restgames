@@ -42,9 +42,10 @@ class MastermindGame(RestGameClient, MastermindApi):
 
 mmind = MastermindGame("localhost")
 
-# # game.register("username", "password", "I'm the first user")
+# # mmind.register("username", "password", "I'm the first user")
 mmind.login("username", "password")
-# # game.startNewGame()
+# # mmind.startNewGame()
 mmind.rejoinGame("755494111")
 
+# Colours are: Blue, Green, Yellow, Pink, Orange, Red
 mmind.guess("bgpy")

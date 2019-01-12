@@ -3,12 +3,6 @@
 import requests
 import json
 
-# GAME_HOST = "localhost"
-# GAME_PORT = "8080"
-# GAME_INSTANCE = "mastermind"
-
-# API_KEY_GUESS = "guess"
-
 class RestApi(object):
 	def __init__(self):
 		self.HTTP_HEADER_CONTENT_TYPE = "Content-Type"
@@ -86,12 +80,3 @@ class RestGameClient(RestApi):
 	def rejoinGame(self, gameIdToJoin):
 		self.makeRequestAndParseResponse(self.getGameBaseUrl()+self.API_LOCATION_REJOIN+gameIdToJoin)
 		print("Game "+self.gameId+" rejoined...")
-
-
-
-# game = RestGameClient("localhost", gameName="mastermind")
-
-# # game.register("username", "password", "I'm the first user")
-# game.login("username", "password")
-# # game.startNewGame()
-# game.rejoinGame("755494111")
