@@ -1,5 +1,17 @@
 # GUTS Hacker Olympics // RestGames
 
+# Challenges
+
+| Challenge | Description | Points |
+|-----------|-------------|--------|
+| Minimum Viable| Registered a team account | 10 |
+| Dipping A Toe | Attempted a game | 10 |
+| WINNING       | Completed a game | 40 |
+| Best In Class | Gold, Silver, Bronze highest score or shortest completion time in each game | 150, 100, 50 |
+| Tenacious, Not Stubborn | Most moves or longest completion time for successfully completing each game | 50 |
+| First Principles | Completing a game by using only Postman or Rested (or similar) | 100 |
+| Solving @ Scale | Writing an automatic solver for a game | 250 |
+
 ## Connection details
 The Game Service is running at joshua-env.sj5nm3sr7a.us-east-2.elasticbeanstalk.com
 
